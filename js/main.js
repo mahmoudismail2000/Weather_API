@@ -46,7 +46,7 @@ function countryLocation() {
     
 })
 }
-loadingId.style.display='block'
+
 async function weather(nameOfCity) {
   
   var data = await fetch(
@@ -54,7 +54,7 @@ async function weather(nameOfCity) {
   );
   var response = await data.json();
   theNameCity=(response.location.name).split(' ')[0]
-  loadingId.style.display='none'
+  
   var tomorrowTempMax=response.forecast.forecastday[1].day.maxtemp_c
   var tomorrowTempMin=response.forecast.forecastday[1].day.mintemp_c
   var tomorrowCondition=response.forecast.forecastday[1].day.condition.text
