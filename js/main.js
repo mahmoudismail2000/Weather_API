@@ -50,7 +50,7 @@ loadingId.style.display='block'
 async function weather(nameOfCity) {
   
   var data = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=bb2b8064aa9d4bd6a0c145738240201&q=${nameOfCity}&days=3&aqi=no&alerts=no`
+    `https://api.weatherapi.com/v1/forecast.json?key=bb2b8064aa9d4bd6a0c145738240201&q=${nameOfCity}&days=3&aqi=no&alerts=no`
   );
   var response = await data.json();
   theNameCity=(response.location.name).split(' ')[0]
