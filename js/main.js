@@ -36,25 +36,26 @@ var options = { month: "long" };
 var formattedDate = date.toLocaleDateString("en-US", options);
 
 function countryLocation() {
-  navigator.geolocation.getCurrentPosition( async function (position) {
+  navigator.geolocation.getCurrentPosition(async function (position) {
     var lati = position.coords.latitude;
     var long = position.coords.longitude;
     
     var city=await getCountryName(lati, long)
-       weather(city)
+    weather(city)
+    
        
     
 })
 }
-
+loadingId.style.display='block'
 async function weather(nameOfCity) {
   
   var data = await fetch(
-    `https://api.weatherapi.com/v1/forecast.json?key=bb2b8064aa9d4bd6a0c145738240201&q=${nameOfCity}&days=3&aqi=no&alerts=no`
+    `http://api.weatherapi.com/v1/forecast.json?key=06884d8390fa4908b85134814240401&q=${nameOfCity}&days=3&aqi=no&alerts=no`
   );
   var response = await data.json();
   theNameCity=(response.location.name).split(' ')[0]
-  
+  loadingId.style.display='none'
   var tomorrowTempMax=response.forecast.forecastday[1].day.maxtemp_c
   var tomorrowTempMin=response.forecast.forecastday[1].day.mintemp_c
   var tomorrowCondition=response.forecast.forecastday[1].day.condition.text
@@ -74,7 +75,8 @@ async function getCountryName(latitude, longitude) {
     `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
   );
   var response = await data.json();
-  return response.address.city
+  return response.address.country
+  
   
 }
 
